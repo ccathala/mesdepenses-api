@@ -8,8 +8,7 @@ public class MesdepensesApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MesdepensesApiApplication.class, args);
-		System.out.println("Coucou");
-		System.out.println("Recoucou");
+		System.out.println("Coucou le test");
 	}
 
 }
