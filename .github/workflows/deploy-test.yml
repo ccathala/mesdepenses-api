@@ -46,6 +46,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: mesdepenses-api-test-app
+          path: artifact
 
       - name: "Login via Azure CLI"
         uses: azure/login@v1
