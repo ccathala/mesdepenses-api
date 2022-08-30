@@ -1,4 +1,4 @@
-name: Configure Azure environment Prod
+name: 01 - Set Azure Prod environment 
 
 on: workflow_dispatch 
 

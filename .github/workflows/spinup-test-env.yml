@@ -1,4 +1,4 @@
-name: Set Azure Test environment 
+name: 00 - Set Azure Test environment 
 
 on: workflow_dispatch 
 

@@ -1,4 +1,4 @@
-name: CI dev
+name: 10 - CI dev
 
 on: 
   push:
@@ -35,6 +35,6 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: mesdepenses-api-app
+          name: mesdepenses-api-test-app
           path: '${{ github.workspace }}/target/*.jar' 
 

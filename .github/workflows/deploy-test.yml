@@ -1,4 +1,4 @@
-name: Test deployment
+name: 20 - Test deployment
 
 on: 
   push:
@@ -24,7 +24,7 @@ jobs:
       - name: Download workflow artifact
         uses: dawidd6/action-download-artifact@v2.23.0
         with:
-          name: mesdepenses-api-app
+          name: mesdepenses-api-test-app
           workflow: ci-dev.yml
           workflow_conclusion: success
           branch: dev
