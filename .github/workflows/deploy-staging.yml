@@ -3,11 +3,13 @@ name: Stage the app
 on: 
   pull_request:
     types: [labeled]
+  workflow_dispatch:
 
 env:
   DOCKER_IMAGE_NAME: mesdepenses-api-dev
   IMAGE_REGISTRY_URL: docker.pkg.github.com
-  JAVA_VERSION: '11'                       # set this to the Java version to use
+  JAVA_VERSION: '11'
+  JAVA_DISTRIBUTION: temurin                       # set this to the Java version to use
   #################################################
   ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
   #################################################
