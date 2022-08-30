@@ -3,7 +3,6 @@ name: Configure Azure environment
 on: workflow_dispatch 
 
 env:
-  PACKAGES_TOKEN: ${{secrets.PACKAGES_TOKEN}}
   AZURE_RESOURCE_GROUP: mesdepenses
   AZURE_APP_PLAN: mesdepenses
   AZURE_LOCATION: '"France Central"'

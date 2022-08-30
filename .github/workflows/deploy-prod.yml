@@ -3,7 +3,7 @@ name: Production deployment
 on: 
   push:
     branches:
-      - main
+      - master
 
 env:
   DOCKER_IMAGE_NAME: mesdepenses-api-prod # Must not exist as a package associated with a different repo!
