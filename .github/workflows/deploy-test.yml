@@ -21,14 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy app container to Azure
     steps:
-      # - name: Download built artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: mesdepenses-api-test-app
-      #     path: artifact
-
-      - run: mkdir -p artifact
-
       - name: Download workflow artifact
         uses: dawidd6/action-download-artifact@v2.23.0
         with:
@@ -36,7 +28,6 @@ jobs:
           workflow: ci-dev.yml
           workflow_conclusion: success
           branch: dev
-          path: artifact/
           
       - name: "Login via Azure CLI"
         uses: azure/login@v1
@@ -55,5 +46,5 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: mesdepenses-api-app
-          path: 'artifact/target/*.jar'
+          name: mesdepenses-api-prod-app
+          path: '*.jar'
