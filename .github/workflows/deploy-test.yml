@@ -17,27 +17,6 @@ env:
   #################################################
 
 jobs:
-  # Build:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Set up Java version
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         java-version: ${{ env.JAVA_VERSION }}
-  #         distribution: ${{ env.JAVA_DISTRIBUTION }}
-  #         cache: 'maven'
-
-  #     - name: Build with Maven
-  #       run: mvn clean install
-    
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: mesdepenses-api-test-app
-  #         path: '${{ github.workspace }}/target/*.jar' 
-
   Deploy-to-Azure:
     runs-on: ubuntu-latest
     name: Deploy app container to Azure
@@ -51,8 +30,10 @@ jobs:
       - name: Download workflow artifact
         uses: dawidd6/action-download-artifact@v2.23.0
         with:
-          name: mesdepenses-api-test-app
+          name: mesdepenses-api-app
           workflow: ci-dev.yml
+          workflow_conclusion: success
+          branch: dev
           
       - name: "Login via Azure CLI"
         uses: azure/login@v1
@@ -68,3 +49,7 @@ jobs:
       - name: Azure logout
         run: |
           az logout
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: mesdepenses-api-app
