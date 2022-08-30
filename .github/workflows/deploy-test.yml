@@ -1,9 +1,9 @@
-name: Stage the app
+name: Test deployment
 
 on: 
-  pull_request:
-    types: [labeled]
-  workflow_dispatch:
+  push:
+    branches:
+      - test
 
 env:
   JAVA_VERSION: '11'
@@ -13,7 +13,7 @@ env:
   #################################################
   #################################################
   ### REPLACE USERNAME WITH GH USERNAME         ###
-  AZURE_WEBAPP_NAME: mesdepenses-api-dev
+  AZURE_WEBAPP_NAME: mesdepenses-api-test
   #################################################
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
     
       - uses: actions/upload-artifact@v3
         with:
-          name: mesdepenses-api-dev-app
+          name: mesdepenses-api-test-app
           path: '${{ github.workspace }}/target/*.jar' 
 
   Deploy-to-Azure:
@@ -46,7 +46,7 @@ jobs:
       - name: Download built artifact
         uses: actions/download-artifact@v3
         with:
-          name: mesdepenses-api-dev-app
+          name: mesdepenses-api-test-app
 
       - name: "Login via Azure CLI"
         uses: azure/login@v1
