@@ -33,11 +33,8 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      - run: mkdir -p artifact
-      - run: mv ${{ github.workspace }}/target artifact
-
       - uses: actions/upload-artifact@v3
         with:
           name: mesdepenses-api-test-app
-          path: 'artifact/target/*.jar' 
+          path: '${{ github.workspace }}/target/*.jar' 
 
