@@ -19,7 +19,6 @@ env:
 jobs:
   Deploy-to-Azure:
     runs-on: ubuntu-latest
-    needs: Build
     name: Deploy app container to Azure
     steps:
       - name: Download workflow artifact
