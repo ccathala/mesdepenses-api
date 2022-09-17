@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MesdepensesApiApplication<mesdepenses-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ccathala.mesdepensesapi.MesdepensesApiApplication",
+            "projectName": "mesdepenses-api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
