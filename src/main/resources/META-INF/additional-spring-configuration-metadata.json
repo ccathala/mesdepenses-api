@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "app.profile.name",
-  "type": "java.lang.String",
-  "description": "A description for 'app.profile.name'"
-}]}
+{"properties": [
+  {
+    "name": "app.profile.name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.profile.name'"
+  },
+  {
+    "name": "secret",
+    "type": "java.lang.String",
+    "description": "A description for 'secret'"
+  }
+]}
