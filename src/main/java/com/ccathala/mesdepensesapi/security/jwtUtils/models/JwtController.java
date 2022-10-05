@@ -1,5 +1,8 @@
 package com.ccathala.mesdepensesapi.security.jwtUtils.models;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,7 +47,8 @@ public class JwtController {
      * @throws Exception
      */
     @PostMapping("/login")
-    public ResponseEntity<?> createToken(@RequestBody JwtRequestModel request) throws Exception {
+    public ResponseEntity<?> createToken(@RequestBody JwtRequestModel request,
+            HttpServletResponse response) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(),
@@ -56,6 +60,10 @@ public class JwtController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String jwtToken = tokenManager.generateJwtToken(userDetails);
+
+        Cookie cookie = new Cookie("SESSION", jwtToken);
+        response.addCookie(cookie);
+
         return ResponseEntity.ok(new JwtResponseModel(jwtToken));
     }
 }

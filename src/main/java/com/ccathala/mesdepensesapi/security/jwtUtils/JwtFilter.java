@@ -1,9 +1,12 @@
 package com.ccathala.mesdepensesapi.security.jwtUtils;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,11 +43,21 @@ public class JwtFilter extends OncePerRequestFilter {
             HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String tokenHeader = request.getHeader("Authorization");
-        String username = null;
         String token = null;
-        if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
-            token = tokenHeader.substring(7);
+        String username = null;
+        List<Cookie> cookies = null;
+
+        if (request.getCookies() != null) {
+            cookies = Arrays.asList(request.getCookies());
+
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("SESSION")) {
+                    token = cookie.getValue();
+                }
+            }
+        }
+
+        if (token != null) {
             try {
                 username = tokenManager.getUsernameFromToken(token);
             } catch (IllegalArgumentException e) {
@@ -53,8 +66,9 @@ public class JwtFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         } else {
-            System.out.println("Bearer String not found in token");
+            System.out.println("SESSION key not found in cookie");
         }
+
         if (null != username && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (tokenManager.validateJwtToken(token, userDetails)) {
